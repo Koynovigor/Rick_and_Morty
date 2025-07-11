@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.paging.common)
     implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.material3.window.size.class1)
     implementation(libs.kotlinx.serialization.json)
 
     // Navigation

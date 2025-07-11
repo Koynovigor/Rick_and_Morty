@@ -1,6 +1,8 @@
 package com.l3on1kl.rick_and_morty.di
 
 import com.l3on1kl.rick_and_morty.data.remote.api.CharacterApi
+import com.l3on1kl.rick_and_morty.presentation.util.AndroidConnectivityObserver
+import com.l3on1kl.rick_and_morty.presentation.util.ConnectivityObserver
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -64,4 +66,10 @@ object NetworkModule {
         retrofit: Retrofit
     ): CharacterApi =
         retrofit.create(CharacterApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideConnectivityObserver(
+        impl: AndroidConnectivityObserver
+    ): ConnectivityObserver = impl
 }

@@ -48,4 +48,7 @@ class CharacterRepositoryImpl @Inject constructor(
         ).flow.map {
             it.map(entityToDomain)
         }
+
+    override fun hasLocalCharacters(): Flow<Boolean> =
+        dao.observeCount().map { it > 0 }
 }

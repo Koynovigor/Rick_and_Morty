@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import com.l3on1kl.rick_and_morty.data.local.entity.CharacterEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CharacterDao {
@@ -21,6 +22,9 @@ interface CharacterDao {
     """
     )
     fun pagingSourceByName(nameQuery: String): PagingSource<Int, CharacterEntity>
+
+    @Query("SELECT COUNT(*) FROM characters")
+    fun observeCount(): Flow<Int>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(characters: List<CharacterEntity>)
