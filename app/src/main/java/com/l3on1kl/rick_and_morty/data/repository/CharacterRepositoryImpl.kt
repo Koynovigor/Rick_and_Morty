@@ -79,6 +79,9 @@ class CharacterRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getCharacter(id: Int): Character? =
+        dao.getById(id)?.let(entityToDomain)
+
     override fun hasLocalCharacters(
         filter: CharacterFilter
     ): Flow<Boolean> =

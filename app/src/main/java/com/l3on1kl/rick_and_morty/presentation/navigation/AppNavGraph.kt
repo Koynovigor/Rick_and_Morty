@@ -2,12 +2,18 @@ package com.l3on1kl.rick_and_morty.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import com.l3on1kl.rick_and_morty.presentation.character_detail.CharacterDetailRoute
 import com.l3on1kl.rick_and_morty.presentation.characters.CharacterListRoute
 
 sealed class Screen(val route: String) {
     data object Characters : Screen("characters")
+    data object CharacterDetails : Screen("character/{id}") {
+        fun create(id: Int) = "character/$id"
+    }
 }
 
 @Composable
@@ -20,7 +26,34 @@ fun AppNavGraph(
         startDestination = startDestination
     ) {
         composable(Screen.Characters.route) {
-            CharacterListRoute()
+            CharacterListRoute(
+                onItemClick = {
+                    navController.currentBackStackEntry
+                        ?.savedStateHandle
+                        ?.set("avatarUrl", it.imageUrl)
+
+                    navController.navigate(
+                        Screen.CharacterDetails.create(it.id)
+                    )
+                }
+            )
+        }
+
+        composable(
+            route = Screen.CharacterDetails.route,
+            arguments = listOf(navArgument("id") {
+                type = NavType.IntType
+            })
+        ) { entry ->
+            val avatarUrl = navController.previousBackStackEntry
+                ?.savedStateHandle
+                ?.remove<String>("avatarUrl")
+            CharacterDetailRoute(
+                avatarUrl = avatarUrl,
+                onBack = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }

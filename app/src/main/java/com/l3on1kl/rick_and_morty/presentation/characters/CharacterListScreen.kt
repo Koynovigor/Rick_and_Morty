@@ -38,9 +38,9 @@ import com.l3on1kl.rick_and_morty.R
 import com.l3on1kl.rick_and_morty.domain.model.CharacterFilter
 import com.l3on1kl.rick_and_morty.domain.model.Gender
 import com.l3on1kl.rick_and_morty.domain.model.Status
-import com.l3on1kl.rick_and_morty.presentation.characters.component.CharacterGrid
-import com.l3on1kl.rick_and_morty.presentation.characters.component.EnumPicker
-import com.l3on1kl.rick_and_morty.presentation.characters.component.placeholder.PlaceholderGrid
+import com.l3on1kl.rick_and_morty.presentation.characters.components.CharacterGrid
+import com.l3on1kl.rick_and_morty.presentation.characters.components.EnumPicker
+import com.l3on1kl.rick_and_morty.presentation.characters.components.placeholder.PlaceholderGrid
 import com.l3on1kl.rick_and_morty.presentation.characters.model.CharacterListUiState
 import com.l3on1kl.rick_and_morty.presentation.characters.model.CharacterUi
 import com.l3on1kl.rick_and_morty.presentation.util.TextResMapper.asTextRes
@@ -56,7 +56,8 @@ fun CharacterListScreen(
     onSwipeRefresh: () -> Unit,
     onLoadError: (Throwable, Boolean) -> Unit,
     filter: CharacterFilter,
-    onFilterChange: (CharacterFilter) -> Unit
+    onFilterChange: (CharacterFilter) -> Unit,
+    onItemClick: (CharacterUi) -> Unit = {}
 ) {
     val gridState = rememberSaveable(
         saver = LazyGridState.Saver
@@ -204,7 +205,8 @@ fun CharacterListScreen(
                         CharacterGrid(
                             modifier = Modifier.fillMaxSize(),
                             characters = characters,
-                            state = gridState
+                            state = gridState,
+                            onItemClick = onItemClick
                         )
                         LaunchedEffect(Unit) {
                             notifications.showSnackbar(
@@ -227,7 +229,8 @@ fun CharacterListScreen(
                             CharacterGrid(
                                 modifier = Modifier.fillMaxSize(),
                                 characters = characters,
-                                state = gridState
+                                state = gridState,
+                                onItemClick = onItemClick
                             )
                         }
                     }

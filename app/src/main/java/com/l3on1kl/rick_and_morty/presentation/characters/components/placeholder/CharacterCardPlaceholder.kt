@@ -1,5 +1,5 @@
 // presentation/characters/component/placeholder/CharacterCardPlaceholder.kt
-package com.l3on1kl.rick_and_morty.presentation.characters.component.placeholder
+package com.l3on1kl.rick_and_morty.presentation.characters.components.placeholder
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
