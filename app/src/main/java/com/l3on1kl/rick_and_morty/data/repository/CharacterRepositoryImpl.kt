@@ -12,6 +12,7 @@ import com.l3on1kl.rick_and_morty.data.local.entity.EntityToDomainMapper
 import com.l3on1kl.rick_and_morty.data.remote.api.CharacterApi
 import com.l3on1kl.rick_and_morty.data.remote.mapper.DtoToEntityMapper
 import com.l3on1kl.rick_and_morty.data.remote.mediator.CharacterRemoteMediator
+import com.l3on1kl.rick_and_morty.data.remote.paging.SearchPagingSource
 import com.l3on1kl.rick_and_morty.domain.model.Character
 import com.l3on1kl.rick_and_morty.domain.model.CharacterFilter
 import com.l3on1kl.rick_and_morty.domain.repository.CharacterRepository
@@ -31,7 +32,8 @@ class CharacterRepositoryImpl @Inject constructor(
     private val entityToDomain: EntityToDomainMapper
 ) : CharacterRepository {
     override fun getCharacters(
-        filter: CharacterFilter
+        filter: CharacterFilter,
+        online: Boolean
     ): Flow<PagingData<Character>> {
         val mediator = if (filter.isEmpty) {
             CharacterRemoteMediator(
@@ -48,6 +50,13 @@ class CharacterRepositoryImpl @Inject constructor(
         val pagingFactory = {
             if (filter.isEmpty) {
                 dao.pagingSource()
+            } else if (online) {
+                SearchPagingSource(
+                    api,
+                    filter,
+                    dtoToEntity,
+                    dao
+                )
             } else {
                 dao.pagingSourceByFilter(
                     filter.name,

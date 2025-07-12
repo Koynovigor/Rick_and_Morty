@@ -8,11 +8,12 @@
     <string name="unknown_error">Something went wrong</string>
     <string name="nothing_found">Nothing here yet</string>
     <string name="network_error">Network error</string>
-    <string name="species_and_gender">Species: %s, Gender: %s</string>
+    <string name="species_and_gender">%s, %s</string>
     <string name="search_hint">Search by name</string>
     <string name="filter_status">Status</string>
     <string name="filter_species">Species</string>
     <string name="filter_gender">Gender</string>
+    <string name="any">Any</string>
 
     <!-- Character status -->
     <string name="alive">Alive</string>

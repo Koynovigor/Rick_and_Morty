@@ -8,7 +8,8 @@ class GetCharactersUseCase @Inject constructor(
     private val repository: CharacterRepository
 ) {
     operator fun invoke(
-        filter: CharacterFilter = CharacterFilter()
+        filter: CharacterFilter = CharacterFilter(),
+        online: Boolean = true
     ) =
         repository.getCharacters(filter)
 }

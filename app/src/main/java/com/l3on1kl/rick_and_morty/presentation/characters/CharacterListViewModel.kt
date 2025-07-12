@@ -64,8 +64,13 @@ class CharacterListViewModel @Inject constructor(
             .flatMapLatest {
                 _filter
             }
-            .flatMapLatest { filter ->
-                getCharacters(filter)
+            .combine(
+                connectivity.isOnline
+            ) { filter, online ->
+                filter to online
+            }
+            .flatMapLatest { (filter, online) ->
+                getCharacters(filter, online)
                     .map {
                         it.map(Character::toUi)
                     }

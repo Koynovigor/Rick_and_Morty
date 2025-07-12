@@ -7,7 +7,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface CharacterRepository {
     fun getCharacters(
-        filter: CharacterFilter = CharacterFilter()
+        filter: CharacterFilter = CharacterFilter(),
+        online: Boolean = true
     ): Flow<PagingData<Character>>
 
     fun hasLocalCharacters(

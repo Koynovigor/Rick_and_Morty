@@ -36,9 +36,11 @@ import com.l3on1kl.rick_and_morty.domain.model.CharacterFilter
 import com.l3on1kl.rick_and_morty.domain.model.Gender
 import com.l3on1kl.rick_and_morty.domain.model.Status
 import com.l3on1kl.rick_and_morty.presentation.characters.component.CharacterGrid
+import com.l3on1kl.rick_and_morty.presentation.characters.component.EnumPicker
 import com.l3on1kl.rick_and_morty.presentation.characters.component.placeholder.PlaceholderGrid
 import com.l3on1kl.rick_and_morty.presentation.characters.model.CharacterListUiState
 import com.l3on1kl.rick_and_morty.presentation.characters.model.CharacterUi
+import com.l3on1kl.rick_and_morty.presentation.util.TextResMapper.asTextRes
 import com.l3on1kl.rick_and_morty.presentation.util.UiText
 import kotlinx.coroutines.launch
 
@@ -133,18 +135,36 @@ fun CharacterListScreen(
                 )
                 Spacer(Modifier.size(8.dp))
                 Row {
-                    OutlinedTextField(
-                        value = filter.status?.name ?: "",
-                        onValueChange = { onFilterChange(filter.copy(status = Status.safeValueOf(it))) },
+                    EnumPicker(
                         modifier = Modifier.weight(1f),
-                        placeholder = { Text(stringResource(R.string.filter_status)) }
+                        labelRes = R.string.filter_status,
+                        selected = filter.status,
+                        onValueChange = {
+                            onFilterChange(
+                                filter.copy(status = it)
+                            )
+                        },
+                        entries = Status.entries.toTypedArray(),
+                        textResMapper = {
+                            it.asTextRes()
+                        }
                     )
-                    Spacer(Modifier.size(8.dp))
-                    OutlinedTextField(
-                        value = filter.gender?.name ?: "",
-                        onValueChange = { onFilterChange(filter.copy(gender = Gender.safeValueOf(it))) },
+                    Spacer(
+                        modifier = Modifier.size(8.dp)
+                    )
+                    EnumPicker(
                         modifier = Modifier.weight(1f),
-                        placeholder = { Text(stringResource(R.string.filter_gender)) },
+                        labelRes = R.string.filter_gender,
+                        selected = filter.gender,
+                        onValueChange = {
+                            onFilterChange(
+                                filter.copy(gender = it)
+                            )
+                        },
+                        entries = Gender.entries.toTypedArray(),
+                        textResMapper = {
+                            it.asTextRes()
+                        }
                     )
                 }
             }

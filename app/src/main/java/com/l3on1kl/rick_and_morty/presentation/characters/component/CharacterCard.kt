@@ -28,7 +28,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
@@ -147,9 +146,7 @@ fun CharacterCard(
                         stringResource(character.gender.asTextRes())
                     ),
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.White.copy(alpha = .9f),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    color = Color.White.copy(alpha = .9f)
                 )
             }
         }
