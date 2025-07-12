@@ -86,21 +86,34 @@ class CharacterListViewModel @Inject constructor(
         viewModelScope.launch {
             combine(
                 characters,
+                _filter,
                 _filter.flatMapLatest {
                     hasCharacters(it)
                 },
                 connectivity.isOnline
-            ) { paging, hasCache, online ->
-                when {
-                    !hasCache && online -> CharacterListUiState.Loading
+            ) { paging, filter, hasCache, online ->
+                if (filter.isEmpty) {
+                    when {
+                        !hasCache && online -> CharacterListUiState.Loading
 
-                    !hasCache && !online -> CharacterListUiState.Error(
-                        UiText.Resource(R.string.no_connection)
-                    )
+                        !hasCache && !online -> CharacterListUiState.Error(
+                            UiText.Resource(R.string.no_connection)
+                        )
 
-                    hasCache && online -> CharacterListUiState.Success(paging)
+                        hasCache && online -> CharacterListUiState.Success(paging)
 
-                    else -> CharacterListUiState.Offline(paging)
+                        else -> CharacterListUiState.Offline(paging)
+                    }
+                } else {
+                    when {
+                        online -> CharacterListUiState.Success(paging)
+
+                        hasCache -> CharacterListUiState.Offline(paging)
+
+                        else -> CharacterListUiState.Error(
+                            UiText.Resource(R.string.no_connection)
+                        )
+                    }
                 }
             }.collect(_uiState::value::set)
         }

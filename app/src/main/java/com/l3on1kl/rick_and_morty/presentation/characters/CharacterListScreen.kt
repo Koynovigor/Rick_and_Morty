@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
@@ -113,7 +114,8 @@ fun CharacterListScreen(
         modifier = modifier
             .fillMaxSize()
             .windowInsetsPadding(WindowInsets.safeDrawing),
-        isRefreshing = characters.loadState.refresh is LoadState.Loading,
+        isRefreshing = characters.loadState.refresh is LoadState.Loading &&
+                filter.isEmpty,
         onRefresh = refreshAction
     ) {
         Column(
@@ -201,7 +203,8 @@ fun CharacterListScreen(
                         if (characters.itemCount == 0) {
                             Text(
                                 text = stringResource(R.string.nothing_found),
-                                modifier = Modifier.align(Alignment.Center)
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.Center
                             )
                         } else {
                             CharacterGrid(

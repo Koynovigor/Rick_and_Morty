@@ -7,6 +7,7 @@ import com.l3on1kl.rick_and_morty.data.local.entity.CharacterEntity
 import com.l3on1kl.rick_and_morty.data.remote.api.CharacterApi
 import com.l3on1kl.rick_and_morty.data.remote.mapper.DtoToEntityMapper
 import com.l3on1kl.rick_and_morty.domain.model.CharacterFilter
+import retrofit2.HttpException
 
 private const val INITIAL_PAGE = 1
 
@@ -46,6 +47,16 @@ class SearchPagingSource(
                 prevKey = if (page == INITIAL_PAGE) null else page - 1,
                 nextKey = if (response.pageInfo.next == null) null else page + 1
             )
+        } catch (e: HttpException) {
+            if (e.code() == 404) {
+                LoadResult.Page(
+                    data = emptyList(),
+                    prevKey = null,
+                    nextKey = null
+                )
+            } else {
+                LoadResult.Error(e)
+            }
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
