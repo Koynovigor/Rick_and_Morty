@@ -5,8 +5,16 @@ data class Character(
     val name: String,
     val status: Status,
     val species: String,
+    val type: String,
     val gender: Gender,
-    val imageUrl: String
+    val imageUrl: String,
+    val originName: String,
+    val originUrl: String,
+    val locationName: String,
+    val locationUrl: String,
+    val episodes: List<String>,
+    val url: String,
+    val created: String
 )
 
 enum class Status {

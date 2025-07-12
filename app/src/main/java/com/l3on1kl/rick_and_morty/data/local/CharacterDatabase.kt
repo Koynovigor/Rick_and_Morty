@@ -14,7 +14,7 @@ import com.l3on1kl.rick_and_morty.data.local.util.EnumConverters
         CharacterEntity::class,
         CharacterRemoteKeys::class
     ],
-    version = 3,
+    version = 5,
     exportSchema = true
 )
 @TypeConverters(EnumConverters::class)

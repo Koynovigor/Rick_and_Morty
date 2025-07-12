@@ -56,7 +56,8 @@ fun CharacterListScreen(
     onSwipeRefresh: () -> Unit,
     onLoadError: (Throwable, Boolean) -> Unit,
     filter: CharacterFilter,
-    onFilterChange: (CharacterFilter) -> Unit
+    onFilterChange: (CharacterFilter) -> Unit,
+    onItemClick: (CharacterUi) -> Unit = {}
 ) {
     val gridState = rememberSaveable(
         saver = LazyGridState.Saver
@@ -204,7 +205,8 @@ fun CharacterListScreen(
                         CharacterGrid(
                             modifier = Modifier.fillMaxSize(),
                             characters = characters,
-                            state = gridState
+                            state = gridState,
+                            onItemClick = onItemClick
                         )
                         LaunchedEffect(Unit) {
                             notifications.showSnackbar(
@@ -227,7 +229,8 @@ fun CharacterListScreen(
                             CharacterGrid(
                                 modifier = Modifier.fillMaxSize(),
                                 characters = characters,
-                                state = gridState
+                                state = gridState,
+                                onItemClick = onItemClick
                             )
                         }
                     }

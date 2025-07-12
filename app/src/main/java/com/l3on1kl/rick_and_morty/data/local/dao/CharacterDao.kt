@@ -52,6 +52,9 @@ interface CharacterDao {
     @Query("SELECT COUNT(*) FROM characters")
     fun observeCount(): Flow<Int>
 
+    @Query("SELECT * FROM characters WHERE id = :id")
+    suspend fun getById(id: Int): CharacterEntity?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(characters: List<CharacterEntity>)
 

@@ -21,6 +21,14 @@ data class CharacterEntity(
     val name: String,
     val status: Status,
     val species: String,
+    val type: String,
     val gender: Gender,
-    @ColumnInfo(name = "image_url") val imageUrl: String
+    @ColumnInfo(name = "image_url") val imageUrl: String,
+    @ColumnInfo(name = "origin_name") val originName: String,
+    @ColumnInfo(name = "origin_url") val originUrl: String,
+    @ColumnInfo(name = "location_name") val locationName: String,
+    @ColumnInfo(name = "location_url") val locationUrl: String,
+    val episodes: List<String>,
+    val url: String,
+    val created: String
 )

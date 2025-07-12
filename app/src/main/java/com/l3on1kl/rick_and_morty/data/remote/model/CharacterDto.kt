@@ -9,6 +9,18 @@ data class CharacterDto(
     val name: String,
     val status: String,
     val species: String,
+    val type: String,
     val gender: String,
-    @SerialName("image") val imageUrl: String
+    val origin: LocationDto,
+    val location: LocationDto,
+    @SerialName("image") val imageUrl: String,
+    val episode: List<String>,
+    val url: String,
+    val created: String,
+)
+
+@Serializable
+data class LocationDto(
+    val name: String,
+    val url: String,
 )

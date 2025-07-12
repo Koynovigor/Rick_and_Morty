@@ -14,4 +14,6 @@ interface CharacterRepository {
     fun hasLocalCharacters(
         filter: CharacterFilter = CharacterFilter()
     ): Flow<Boolean>
+
+    suspend fun getCharacter(id: Int): Character?
 }
