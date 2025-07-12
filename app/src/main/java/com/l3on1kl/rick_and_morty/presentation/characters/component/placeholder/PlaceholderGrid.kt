@@ -51,7 +51,7 @@ fun PlaceholderGrid(
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         contentPadding = PaddingValues(16.dp)
     ) {
-        items(columns * 6) {
+        items(columns * 2) {
             CharacterCardPlaceholder()
         }
 

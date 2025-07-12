@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -123,17 +125,31 @@ fun CharacterListScreen(
         ) {
             Column(Modifier.padding(16.dp)) {
                 OutlinedTextField(
+                    modifier = Modifier.fillMaxWidth(),
                     value = filter.name.orEmpty(),
-                    onValueChange = { onFilterChange(filter.copy(name = it)) },
-                    placeholder = { Text(stringResource(R.string.search_hint)) },
-                    modifier = Modifier.fillMaxWidth()
+                    onValueChange = {
+                        onFilterChange(filter.copy(name = it))
+                    },
+                    placeholder = {
+                        Text(
+                            stringResource(R.string.search_hint)
+                        )
+                    },
+                    singleLine = true
                 )
                 Spacer(Modifier.size(8.dp))
                 OutlinedTextField(
+                    modifier = Modifier.fillMaxWidth(),
                     value = filter.species.orEmpty(),
-                    onValueChange = { onFilterChange(filter.copy(species = it)) },
-                    placeholder = { Text(stringResource(R.string.filter_species)) },
-                    modifier = Modifier.fillMaxWidth()
+                    onValueChange = {
+                        onFilterChange(filter.copy(species = it))
+                    },
+                    placeholder = {
+                        Text(
+                            stringResource(R.string.filter_species)
+                        )
+                    },
+                    singleLine = true
                 )
                 Spacer(Modifier.size(8.dp))
                 Row {
@@ -204,7 +220,8 @@ fun CharacterListScreen(
                             Text(
                                 text = stringResource(R.string.nothing_found),
                                 modifier = Modifier.fillMaxWidth(),
-                                textAlign = TextAlign.Center
+                                textAlign = TextAlign.Center,
+                                color = MaterialTheme.colorScheme.onBackground
                             )
                         } else {
                             CharacterGrid(
@@ -221,7 +238,12 @@ fun CharacterListScreen(
                 SnackbarHost(
                     notifications,
                     Modifier.align(Alignment.BottomCenter)
-                )
+                ) {
+                    Snackbar(
+                        snackbarData = it,
+                        containerColor = MaterialTheme.colorScheme.background,
+                    )
+                }
             }
         }
     }

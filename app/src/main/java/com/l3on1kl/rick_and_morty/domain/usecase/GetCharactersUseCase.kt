@@ -11,5 +11,5 @@ class GetCharactersUseCase @Inject constructor(
         filter: CharacterFilter = CharacterFilter(),
         online: Boolean = true
     ) =
-        repository.getCharacters(filter)
+        repository.getCharacters(filter, online)
 }

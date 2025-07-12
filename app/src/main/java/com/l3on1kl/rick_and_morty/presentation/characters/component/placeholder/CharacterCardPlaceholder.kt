@@ -33,10 +33,7 @@ fun CharacterCardPlaceholder(
         modifier = modifier
             .aspectRatio(0.75f),
         shape = shape,
-        elevation = CardDefaults.elevatedCardElevation(6.dp),
-        colors = CardDefaults.elevatedCardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
-        )
+        elevation = CardDefaults.elevatedCardElevation(6.dp)
     ) {
         Box(Modifier.fillMaxSize()) {
 
@@ -45,7 +42,8 @@ fun CharacterCardPlaceholder(
                     .fillMaxSize()
                     .placeholder(
                         placeholderState = phState,
-                        shape = shape
+                        shape = shape,
+                        color = MaterialTheme.colorScheme.surfaceContainer
                     )
             )
 
@@ -78,14 +76,20 @@ fun CharacterCardPlaceholder(
                     modifier = Modifier
                         .fillMaxWidth(0.7f)
                         .height(20.dp)
-                        .placeholder(phState)
+                        .placeholder(
+                            phState,
+                            color = MaterialTheme.colorScheme.surfaceContainer.copy(0.5f)
+                        )
                 )
                 Spacer(Modifier.height(4.dp))
                 Box(
                     modifier = Modifier
                         .fillMaxWidth(0.9f)
                         .height(14.dp)
-                        .placeholder(phState)
+                        .placeholder(
+                            phState,
+                            color = MaterialTheme.colorScheme.surfaceContainer.copy(0.5f)
+                        )
                 )
             }
         }

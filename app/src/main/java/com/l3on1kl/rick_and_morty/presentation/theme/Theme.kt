@@ -15,7 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 
 private val DarkColorScheme = darkColorScheme(
-    primary = PortalGreen,
+    primary = RickPurple,
     onPrimary = Color.Black,
     secondary = MortyYellow,
     onSecondary = Color.Black,
@@ -25,9 +25,10 @@ private val DarkColorScheme = darkColorScheme(
     onBackground = TextPrimary,
     surface = SurfaceDark,
     onSurface = TextSecondary,
+    surfaceContainer = SurfaceContainerDark,
     error = StatusDead,
     onError = Color.Black,
-    surfaceVariant = Color(0xFF2A2E39),
+    surfaceVariant = Color.Black,
     onSurfaceVariant = Color(0xFFB0BEC5),
     outline = StatusUnknown,
     inverseOnSurface = Color.White,
@@ -46,9 +47,10 @@ private val LightColorScheme = lightColorScheme(
     onBackground = TextOnLight,
     surface = SurfaceLight,
     onSurface = TextOnLightSecondary,
+    surfaceContainer = SurfaceContainerLight,
     error = StatusDead,
     onError = Color.White,
-    surfaceVariant = Color(0xFFF2F2F2),
+    surfaceVariant = Color(0xFFF0FFFF),
     onSurfaceVariant = Color(0xFF666666),
     outline = StatusUnknown,
     inverseOnSurface = Color.Black,
@@ -65,7 +67,7 @@ val Shapes = Shapes(
 @Composable
 fun RickAndMortyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
