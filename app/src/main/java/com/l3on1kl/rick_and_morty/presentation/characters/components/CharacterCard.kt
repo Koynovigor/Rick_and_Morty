@@ -80,7 +80,7 @@ fun CharacterCard(
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(character.imageUrl)
-                    .crossfade(true)
+                    .crossfade(100)
                     .build(),
                 contentDescription = character.name,
                 contentScale = ContentScale.Crop,

@@ -16,6 +16,7 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -41,9 +42,10 @@ fun CharacterGrid(
         }
         return
     }
-    val windowSizeClass = calculateWindowSizeClass(activity)
-    val currentWidthSizeClass = windowSizeClass.widthSizeClass
-
+    val calculateWindowSize = calculateWindowSizeClass(activity).widthSizeClass
+    val currentWidthSizeClass = remember(activity) {
+        calculateWindowSize
+    }
 
     val columns = when (currentWidthSizeClass) {
         WindowWidthSizeClass.Compact -> GridCells.Fixed(2)
@@ -59,7 +61,10 @@ fun CharacterGrid(
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         contentPadding = PaddingValues(16.dp)
     ) {
-        items(characters.itemCount) { idx ->
+        items(
+            count = characters.itemCount,
+            key = { index -> characters[index]?.id!! }
+        ) { idx ->
             characters[idx]?.let { character ->
                 CharacterCard(
                     character = character,

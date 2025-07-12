@@ -35,7 +35,8 @@ fun EpisodesCard(
     ) {
         Text(
             stringResource(R.string.detail_episodes, episodes.size),
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onBackground
         )
         Spacer(Modifier.height(12.dp))
         FlowRow(

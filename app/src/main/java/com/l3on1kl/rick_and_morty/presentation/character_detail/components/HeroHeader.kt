@@ -49,7 +49,7 @@ fun HeroHeader(
             ImageRequest
                 .Builder(context)
                 .data(imageUrl)
-                .crossfade(true)
+                .crossfade(100)
                 .build()
         }
 
