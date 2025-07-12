@@ -7,13 +7,17 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun CharacterDetailRoute(
+    avatarUrl: String?,
     modifier: Modifier = Modifier,
+    onBack: () -> Unit,
     viewModel: CharacterDetailViewModel = hiltViewModel(),
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
 
     CharacterDetailScreen(
         uiState = uiState,
-        modifier = modifier
+        avatarUrl = avatarUrl,
+        modifier = modifier,
+        onBack = onBack
     )
 }

@@ -1,5 +1,6 @@
 package com.l3on1kl.rick_and_morty.presentation.character_detail.model
 
+import com.l3on1kl.rick_and_morty.R
 import com.l3on1kl.rick_and_morty.domain.model.Character
 import com.l3on1kl.rick_and_morty.domain.model.Gender as DomainGender
 import com.l3on1kl.rick_and_morty.domain.model.Status as DomainStatus
@@ -63,3 +64,18 @@ private fun DomainGender.toUiGender(): CharacterDetailUi.Gender = when (this) {
     DomainGender.GENDERLESS -> CharacterDetailUi.Gender.GENDERLESS
     DomainGender.UNKNOWN -> CharacterDetailUi.Gender.UNKNOWN
 }
+
+fun CharacterDetailUi.Status.asTextRes(): Int =
+    when (this) {
+        CharacterDetailUi.Status.ALIVE -> R.string.alive
+        CharacterDetailUi.Status.DEAD -> R.string.dead
+        CharacterDetailUi.Status.UNKNOWN -> R.string.unknown
+    }
+
+fun CharacterDetailUi.Gender.asTextRes(): Int =
+    when (this) {
+        CharacterDetailUi.Gender.FEMALE -> R.string.female
+        CharacterDetailUi.Gender.MALE -> R.string.male
+        CharacterDetailUi.Gender.GENDERLESS -> R.string.genderless
+        CharacterDetailUi.Gender.UNKNOWN -> R.string.unknown_gender
+    }

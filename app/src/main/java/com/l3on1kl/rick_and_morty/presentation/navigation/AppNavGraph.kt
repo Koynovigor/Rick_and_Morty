@@ -28,6 +28,10 @@ fun AppNavGraph(
         composable(Screen.Characters.route) {
             CharacterListRoute(
                 onItemClick = {
+                    navController.currentBackStackEntry
+                        ?.savedStateHandle
+                        ?.set("avatarUrl", it.imageUrl)
+
                     navController.navigate(
                         Screen.CharacterDetails.create(it.id)
                     )
@@ -40,8 +44,16 @@ fun AppNavGraph(
             arguments = listOf(navArgument("id") {
                 type = NavType.IntType
             })
-        ) {
-            CharacterDetailRoute()
+        ) { entry ->
+            val avatarUrl = navController.previousBackStackEntry
+                ?.savedStateHandle
+                ?.remove<String>("avatarUrl")
+            CharacterDetailRoute(
+                avatarUrl = avatarUrl,
+                onBack = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }

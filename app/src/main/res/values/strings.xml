@@ -27,12 +27,13 @@
     <string name="unknown_gender">Unknown</string>
 
     <!-- Detail Screen -->
-    <string name="detail_status">Status: %s</string>
-    <string name="detail_species">Species: %s</string>
-    <string name="detail_type">Type: %s</string>
-    <string name="detail_gender">Gender: %s</string>
-    <string name="detail_origin">Origin: %s</string>
-    <string name="detail_location">Location: %s</string>
-    <string name="detail_episodes">Episodes: %d</string>
-    <string name="detail_created">Created: %s</string>
+    <string name="detail_status">Status</string>
+    <string name="detail_species">Species </string>
+    <string name="detail_type">Type</string>
+    <string name="detail_gender">Gender</string>
+    <string name="detail_origin">Origin</string>
+    <string name="detail_location">Location</string>
+    <string name="detail_episodes">Episodes: %s</string>
+    <string name="detail_created">Created</string>
+    <string name="back">Back</string>
 </resources>
