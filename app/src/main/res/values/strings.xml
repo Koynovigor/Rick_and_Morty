@@ -1,12 +1,28 @@
 <resources>
-    <string name="app_name">Rick and Morty</string>
+    <string name="app_name" translatable="false">Rick and Morty</string>
 
-    // Main Screen
-    <string name="no_connection">Нет подключения к интернету</string>
-    <string name="timeout">Время ожидания истекло</string>
-    <string name="server_error">Сервер недоступен</string>
-    <string name="unknown_error">Произошла неизвестная ошибка</string>
-    <string name="empty_list">Список пуст</string>
-    <string name="network_error">Ошибка сети</string>
+    <!-- Main Screen -->
+    <string name="no_connection">No internet connection</string>
+    <string name="timeout">Server took too long to respond</string>
+    <string name="server_error">Server is temporarily unavailable</string>
+    <string name="unknown_error">Something went wrong</string>
+    <string name="nothing_found">Nothing here yet</string>
+    <string name="network_error">Network error</string>
+    <string name="species_and_gender">%s, %s</string>
+    <string name="search_hint">Search by name</string>
+    <string name="filter_status">Status</string>
+    <string name="filter_species">Species</string>
+    <string name="filter_gender">Gender</string>
+    <string name="any">Any</string>
 
+    <!-- Character status -->
+    <string name="alive">Alive</string>
+    <string name="dead">Dead</string>
+    <string name="unknown">Unknown</string>
+
+    <!-- Character gender -->
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="genderless">Genderless</string>
+    <string name="unknown_gender">Unknown</string>
 </resources>
