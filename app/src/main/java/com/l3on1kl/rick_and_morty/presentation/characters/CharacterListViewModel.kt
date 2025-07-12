@@ -7,6 +7,7 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.l3on1kl.rick_and_morty.R
 import com.l3on1kl.rick_and_morty.domain.model.Character
+import com.l3on1kl.rick_and_morty.domain.model.CharacterFilter
 import com.l3on1kl.rick_and_morty.domain.usecase.GetCharactersUseCase
 import com.l3on1kl.rick_and_morty.domain.usecase.HasCharactersUseCase
 import com.l3on1kl.rick_and_morty.presentation.characters.model.CharacterListUiState
@@ -35,14 +36,21 @@ import javax.inject.Inject
 @HiltViewModel
 class CharacterListViewModel @Inject constructor(
     private val getCharacters: GetCharactersUseCase,
-    hasCharacters: HasCharactersUseCase,
+    private val hasCharacters: HasCharactersUseCase,
     connectivity: ConnectivityObserver,
     private val errorMapper: ErrorMapper,
 ) : ViewModel() {
+    private val _filter = MutableStateFlow(CharacterFilter())
+    val filter: StateFlow<CharacterFilter> = _filter.asStateFlow()
     private val refreshTrigger = MutableSharedFlow<Unit>(
         replay = 0,
         extraBufferCapacity = 1
     )
+
+    fun updateFilter(newFilter: CharacterFilter) {
+        _filter.value = newFilter
+        refresh()
+    }
 
     fun refresh() {
         refreshTrigger.tryEmit(Unit)
@@ -54,7 +62,10 @@ class CharacterListViewModel @Inject constructor(
                 emit(Unit)
             }
             .flatMapLatest {
-                getCharacters()
+                _filter
+            }
+            .flatMapLatest { filter ->
+                getCharacters(filter)
                     .map {
                         it.map(Character::toUi)
                     }
@@ -70,7 +81,9 @@ class CharacterListViewModel @Inject constructor(
         viewModelScope.launch {
             combine(
                 characters,
-                hasCharacters(),
+                _filter.flatMapLatest {
+                    hasCharacters(it)
+                },
                 connectivity.isOnline
             ) { paging, hasCache, online ->
                 when {

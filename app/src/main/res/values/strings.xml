@@ -6,9 +6,13 @@
     <string name="timeout">Server took too long to respond</string>
     <string name="server_error">Server is temporarily unavailable</string>
     <string name="unknown_error">Something went wrong</string>
-    <string name="empty_list">Nothing here yet</string>
+    <string name="nothing_found">Nothing here yet</string>
     <string name="network_error">Network error</string>
     <string name="species_and_gender">Species: %s, Gender: %s</string>
+    <string name="search_hint">Search by name</string>
+    <string name="filter_status">Status</string>
+    <string name="filter_species">Species</string>
+    <string name="filter_gender">Gender</string>
 
     <!-- Character status -->
     <string name="alive">Alive</string>

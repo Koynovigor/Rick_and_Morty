@@ -13,6 +13,7 @@ import com.l3on1kl.rick_and_morty.data.remote.api.CharacterApi
 import com.l3on1kl.rick_and_morty.data.remote.mapper.DtoToEntityMapper
 import com.l3on1kl.rick_and_morty.data.remote.mediator.CharacterRemoteMediator
 import com.l3on1kl.rick_and_morty.domain.model.Character
+import com.l3on1kl.rick_and_morty.domain.model.CharacterFilter
 import com.l3on1kl.rick_and_morty.domain.repository.CharacterRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -29,26 +30,57 @@ class CharacterRepositoryImpl @Inject constructor(
     private val dtoToEntity: DtoToEntityMapper,
     private val entityToDomain: EntityToDomainMapper
 ) : CharacterRepository {
-    override fun getCharacters(): Flow<PagingData<Character>> =
-        Pager(
-            config = PagingConfig(
-                pageSize = 20,
-                enablePlaceholders = false
-            ),
-            remoteMediator = CharacterRemoteMediator(
+    override fun getCharacters(
+        filter: CharacterFilter
+    ): Flow<PagingData<Character>> {
+        val mediator = if (filter.isEmpty) {
+            CharacterRemoteMediator(
                 api,
                 database,
                 dao,
                 keysDao,
                 dtoToEntity
-            ),
-            pagingSourceFactory = {
+            )
+        } else {
+            null
+        }
+
+        val pagingFactory = {
+            if (filter.isEmpty) {
                 dao.pagingSource()
+            } else {
+                dao.pagingSourceByFilter(
+                    filter.name,
+                    filter.status,
+                    filter.species,
+                    filter.gender
+                )
             }
+        }
+
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = false
+            ),
+            remoteMediator = mediator,
+            pagingSourceFactory = pagingFactory
         ).flow.map {
             it.map(entityToDomain)
         }
+    }
 
-    override fun hasLocalCharacters(): Flow<Boolean> =
-        dao.observeCount().map { it > 0 }
+    override fun hasLocalCharacters(
+        filter: CharacterFilter
+    ): Flow<Boolean> =
+        if (filter.isEmpty) {
+            dao.observeCount().map { it > 0 }
+        } else {
+            dao.observeCountByFilter(
+                filter.name,
+                filter.status,
+                filter.species,
+                filter.gender
+            ).map { it > 0 }
+        }
 }

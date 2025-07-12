@@ -18,6 +18,7 @@ fun CharacterListRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val characters = viewModel.characters.collectAsLazyPagingItems()
+    val filter by viewModel.filter.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(
@@ -41,6 +42,8 @@ fun CharacterListRoute(
         onSwipeRefresh = {
             characters.refresh()
         },
-        onLoadError = viewModel::onLoadError
+        onLoadError = viewModel::onLoadError,
+        filter = filter,
+        onFilterChange = viewModel::updateFilter
     )
 }
