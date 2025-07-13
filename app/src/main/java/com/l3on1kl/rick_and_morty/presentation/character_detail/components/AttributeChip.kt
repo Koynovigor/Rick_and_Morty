@@ -31,7 +31,6 @@ fun AttributeChip(
                 Text(
                     text = value,
                     style = MaterialTheme.typography.titleMedium,
-                    maxLines = 1
                 )
             }
         },
