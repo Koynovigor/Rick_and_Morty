@@ -208,13 +208,6 @@ fun CharacterListScreen(
                             state = gridState,
                             onItemClick = onItemClick
                         )
-                        LaunchedEffect(Unit) {
-                            notifications.showSnackbar(
-                                UiText.Resource(
-                                    R.string.no_connection
-                                ).asString(context)
-                            )
-                        }
                     }
 
                     is CharacterListUiState.Success -> {

@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -32,6 +31,7 @@ import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.l3on1kl.rick_and_morty.R
+import com.l3on1kl.rick_and_morty.presentation.character_detail.util.AutoResizeText
 import com.l3on1kl.rick_and_morty.presentation.character_detail.util.DetailUtil.statusColor
 import com.l3on1kl.rick_and_morty.presentation.theme.RickAndMortyTheme
 
@@ -99,7 +99,7 @@ fun HeroHeader(
                 )
                 Spacer(Modifier.width(16.dp))
                 Column {
-                    Text(
+                    AutoResizeText(
                         name,
                         style = MaterialTheme.typography.headlineMedium.copy(
                             fontWeight = FontWeight.Bold

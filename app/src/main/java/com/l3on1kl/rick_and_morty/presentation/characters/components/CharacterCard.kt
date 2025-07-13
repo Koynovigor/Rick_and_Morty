@@ -36,6 +36,7 @@ import coil3.request.crossfade
 import coil3.size.Precision
 import coil3.size.Size
 import com.l3on1kl.rick_and_morty.R
+import com.l3on1kl.rick_and_morty.presentation.character_detail.util.AutoResizeText
 import com.l3on1kl.rick_and_morty.presentation.characters.model.CharacterUi
 import com.l3on1kl.rick_and_morty.presentation.theme.StatusAlive
 import com.l3on1kl.rick_and_morty.presentation.theme.StatusDead
@@ -139,7 +140,7 @@ fun CharacterCard(
                         vertical = 12.dp
                     )
             ) {
-                Text(
+                AutoResizeText(
                     text = character.name,
                     style = MaterialTheme.typography.titleMedium,
                     color = Color.White
