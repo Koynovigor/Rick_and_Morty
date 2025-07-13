@@ -61,10 +61,7 @@ fun CharacterGrid(
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         contentPadding = PaddingValues(16.dp)
     ) {
-        items(
-            count = characters.itemCount,
-            key = { index -> characters[index]?.id!! }
-        ) { idx ->
+        items(characters.itemCount) { idx ->
             characters[idx]?.let { character ->
                 CharacterCard(
                     character = character,

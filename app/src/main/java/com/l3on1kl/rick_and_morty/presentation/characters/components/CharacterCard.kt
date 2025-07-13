@@ -31,7 +31,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
+import coil3.request.allowHardware
 import coil3.request.crossfade
+import coil3.size.Precision
+import coil3.size.Size
 import com.l3on1kl.rick_and_morty.R
 import com.l3on1kl.rick_and_morty.presentation.characters.model.CharacterUi
 import com.l3on1kl.rick_and_morty.presentation.theme.StatusAlive
@@ -80,7 +83,10 @@ fun CharacterCard(
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(character.imageUrl)
-                    .crossfade(100)
+                    .size(Size(512, 512))
+                    .precision(Precision.INEXACT)
+                    .allowHardware(true)
+                    .crossfade(false)
                     .build(),
                 contentDescription = character.name,
                 contentScale = ContentScale.Crop,
