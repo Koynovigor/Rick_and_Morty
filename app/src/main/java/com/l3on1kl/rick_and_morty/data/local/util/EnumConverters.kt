@@ -25,4 +25,17 @@ object EnumConverters {
     fun fromGender(
         gender: Gender
     ): String = gender.name
+
+    @TypeConverter
+    fun fromStringList(
+        list: List<String>
+    ): String = list.joinToString(",")
+
+    @TypeConverter
+    fun toStringList(
+        value: String?
+    ): List<String> =
+        value?.takeIf {
+            it.isNotEmpty()
+        }?.split(',') ?: emptyList()
 }

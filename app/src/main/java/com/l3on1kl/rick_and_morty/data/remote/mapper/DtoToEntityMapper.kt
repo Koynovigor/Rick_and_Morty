@@ -11,7 +11,15 @@ class DtoToEntityMapper : (CharacterDto) -> CharacterEntity {
         name = dto.name,
         status = Status.safeValueOf(dto.status),
         species = dto.species,
+        type = dto.type,
         gender = Gender.safeValueOf(dto.gender),
-        imageUrl = dto.imageUrl
+        imageUrl = dto.imageUrl,
+        originName = dto.origin.name,
+        originUrl = dto.origin.url,
+        locationName = dto.location.name,
+        locationUrl = dto.location.url,
+        episodes = dto.episode,
+        url = dto.url,
+        created = dto.created
     )
 }

@@ -8,7 +8,15 @@ class EntityToDomainMapper : (CharacterEntity) -> Character {
         name = entity.name,
         status = entity.status,
         species = entity.species,
+        type = entity.type,
         gender = entity.gender,
-        imageUrl = entity.imageUrl
+        imageUrl = entity.imageUrl,
+        originName = entity.originName,
+        originUrl = entity.originUrl,
+        locationName = entity.locationName,
+        locationUrl = entity.locationUrl,
+        episodes = entity.episodes,
+        url = entity.url,
+        created = entity.created
     )
 }

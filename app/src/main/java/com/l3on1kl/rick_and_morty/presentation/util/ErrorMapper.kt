@@ -1,7 +1,6 @@
 package com.l3on1kl.rick_and_morty.presentation.util
 
 import com.l3on1kl.rick_and_morty.R
-import com.l3on1kl.rick_and_morty.ui.util.UiText
 import java.io.IOException
 import javax.inject.Inject
 

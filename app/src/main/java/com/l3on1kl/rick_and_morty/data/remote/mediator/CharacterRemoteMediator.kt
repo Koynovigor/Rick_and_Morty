@@ -44,7 +44,7 @@ class CharacterRemoteMediator(
 
             LoadType.PREPEND -> {
                 val first = state.firstItemOrNull()
-                    ?: return MediatorResult.Success(endOfPaginationReached = true)
+                    ?: return MediatorResult.Success(false)
 
                 keysDao.remoteKeysById(first.id)?.prevKey
                     ?: return MediatorResult.Success(true)
@@ -52,7 +52,7 @@ class CharacterRemoteMediator(
 
             LoadType.APPEND -> {
                 val last = state.lastItemOrNull()
-                    ?: return MediatorResult.Success(true)
+                    ?: return MediatorResult.Success(false)
 
                 keysDao.remoteKeysById(last.id)?.nextKey
                     ?: return MediatorResult.Success(true)
